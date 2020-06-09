@@ -1,4 +1,4 @@
 module "vpc" {
-  source  = "app.terraform.io/Swapna-training/vpc/aws"
+  source  = "https://github.com/swapnamareddy/terraform-aws-vpc"
   version = "2.38.0"
 }
