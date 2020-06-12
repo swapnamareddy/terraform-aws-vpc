@@ -106,7 +106,7 @@ resource "aws_egress_only_internet_gateway" "this" {
   count = var.create_vpc && var.enable_ipv6 && local.max_subnet_length > 0 ? 1 : 0
 
   vpc_id = local.vpc_id
-}
+},
 
 ################
 # Publiс routes
