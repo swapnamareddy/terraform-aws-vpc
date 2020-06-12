@@ -1,3 +1,7 @@
+// Variables
+variable "vpc_flow_log_cloudwatch_log_group_kms_key_id" {}
+variable "vpc_flow_log_cloudwatch_log_group_retention_in_days" {}
+variable "vpc_flow_log_log_format" {}
 module "vpc" {  
 source  = "app.terraform.io/Swapna-training/vpc/aws"
   version = "2.39.0"
