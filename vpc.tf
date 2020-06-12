@@ -1,4 +1,5 @@
-ource  = "app.terraform.io/Swapna-training/vpc/aws"
+module "vpc" {  
+source  = "app.terraform.io/Swapna-training/vpc/aws"
   version = "2.39.0"
   cidr = "20.10.0.0/16" # 10.0.0.0/8 is reserved for EC2-Classic
   database_subnet_assign_ipv6_address_on_creation = "true"
