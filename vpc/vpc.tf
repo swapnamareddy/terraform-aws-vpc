@@ -1,29 +1,25 @@
-data "aws_availability_zones" "available" {}
+//--------------------------------------------------------------------
+// Variables
+variable "vpc_flow_log_cloudwatch_log_group_kms_key_id" {}
+variable "vpc_flow_log_cloudwatch_log_group_retention_in_days" {}
+variable "vpc_flow_log_log_format" {}
 
+//--------------------------------------------------------------------
+// Modules
 module "vpc" {
   source  = "app.terraform.io/Swapna-training/vpc/aws"
   version = "2.39.0"
-  
-  name = "ipv6"
 
-  cidr = "10.0.0.0/16"
-
-  azs              = [data.aws_availability_zones.available.names[0], data.aws_availability_zones.available.names[1]]
-  private_subnets  = ["10.0.1.0/24", "10.0.2.0/24"]
-  public_subnets   = ["10.0.101.0/24", "10.0.102.0/24"]
-  database_subnets = ["10.0.103.0/24", "10.0.104.0/24"]
-
-  enable_nat_gateway = false
-
-  create_database_subnet_route_table     = true
-  create_database_internet_gateway_route = true
-
-  enable_ipv6                     = true
-  assign_ipv6_address_on_creation = true
-
-  private_subnet_assign_ipv6_address_on_creation = false
-
-  public_subnet_ipv6_prefixes   = [0, 1]
-  private_subnet_ipv6_prefixes  = [2, 3]
-  database_subnet_ipv6_prefixes = [4, 5]
+  database_subnet_assign_ipv6_address_on_creation = "true"
+  elasticache_subnet_assign_ipv6_address_on_creation = "true"
+  enable_classiclink = "true"
+  enable_classiclink_dns_support = "true"
+  flow_log_cloudwatch_log_group_kms_key_id = "${var.vpc_flow_log_cloudwatch_log_group_kms_key_id}"
+  flow_log_cloudwatch_log_group_retention_in_days = "${var.vpc_flow_log_cloudwatch_log_group_retention_in_days}"
+  flow_log_log_format = "${var.vpc_flow_log_log_format}"
+  intra_subnet_assign_ipv6_address_on_creation = "false"
+  private_subnet_assign_ipv6_address_on_creation = "false"
+  public_subnet_assign_ipv6_address_on_creation = "false"
+  redshift_subnet_assign_ipv6_address_on_creation = "false"
+  vpn_gateway_az = "us-east-1"
 }
